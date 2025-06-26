@@ -2,48 +2,55 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Visualizza più PDF</title>
+  <title>Visualizza PDF da Menu</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
       font-family: sans-serif;
+      background-color: #f4f4f4;
     }
-    .pdf-viewer {
+    header {
+      background: #222;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    select {
+      padding: 5px;
+      font-size: 16px;
+      margin: 10px auto;
+      display: block;
+    }
+    iframe {
       width: 100%;
       height: 90vh;
-      margin-bottom: 40px;
       border: none;
-    }
-    h2 {
-      padding: 10px;
-      background-color: #ddd;
     }
   </style>
 </head>
 <body>
 
-  <h2>F&L_2012_1 - Apprendistato</h2>
-  <iframe class="pdf-viewer"
-    src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2012_1_apprendistato_web.pdf">
-  </iframe>
+  <header>
+    <h1>Visualizzatore PDF Interattivo</h1>
+  </header>
 
-  <h2>F&L_2013_1 - Monografico Discobull</h2>
-  <iframe class="pdf-viewer"
-    src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2013_1_monografico_Discobull_web.pdf">
-  </iframe>
+  <select id="pdfSelector" onchange="cambiaPDF()">
+    <option value="https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2012_1_apprendistato_web.pdf"> F&L_2012_1 - Apprendistato Apprendistato</option>
+    <option value="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2013_1_monografico_Discobull_web.pdf">F&L_2013_1 - Monografico Discobull</option>
+    <option value="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2013_2_politiche_del_lavoro.pdf">F&L_2013_2 - Politiche del lavoro</option>
+    <option value="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2014_n1_inclusione_fasce_deboli_web.pdf">F&L_2014_1 - Inclusione fasce più deboli</option>
+  </select>
 
-  <h2>F&L_2013_2 - Politiche del lavoro</h2>
-  <iframe class="pdf-viewer"
-    src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2013_2_politiche_del_lavoro.pdf">
-  </iframe>
+  <iframe id="pdfViewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2012_1_apprendistato_web.pdf"></iframe>
 
-   <h2>F&L_2014_1 - Inclusione fasce più deboli</h2>
-  <iframe class="pdf-viewer"
-    src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://raw.githubusercontent.com/Fenice78/catalogo/main/F%26L_2014_n1_inclusione_fasce_deboli_web.pdf">
-  </iframe>
+  <script>
+    function cambiaPDF() {
+      const selector = document.getElementById("pdfSelector");
+      const viewer = document.getElementById("pdfViewer");
+      const file = selector.value;
+      viewer.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(file);
+    }
+  </script>
 
 </body>
 </html>
-
